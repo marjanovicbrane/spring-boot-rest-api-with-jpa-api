@@ -50,14 +50,27 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
 	@Override
 	public void save(Employee theEmployee) {
 		
+		//save or update the employee
+		//if we have id then will execute update, otherwise will execute save(id=0)
 		Employee employee=entityManager.merge(theEmployee);
 
+		//this is useful in our REST API for returning generated id
 		theEmployee.setId(employee.getId());
 	}
 
 	@Override
 	public void deleteById(int theId) {
-		// TODO Auto-generated method stub
+
+		// delete object with primary key
+		//WE ARE ALSO USING HERE STANDARD JPA API with JPQL
+		//first we need to define parameter employeeId 
+		Query query=entityManager.createQuery("delete from Employee where id=:employeeId");
+				
+		//and then we need to set the parameter to primary key theId
+		query.setParameter("employeeId", theId);
+				
+		//execute query
+		query.executeUpdate();
 
 	}
 
