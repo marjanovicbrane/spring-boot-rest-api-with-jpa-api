@@ -49,8 +49,10 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
 
 	@Override
 	public void save(Employee theEmployee) {
-		// TODO Auto-generated method stub
+		
+		Employee employee=entityManager.merge(theEmployee);
 
+		theEmployee.setId(employee.getId());
 	}
 
 	@Override
