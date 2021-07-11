@@ -40,8 +40,11 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
 
 	@Override
 	public Employee findById(int theId) {
-		// TODO Auto-generated method stub
-		return null;
+		// now retrieve/read object from database using the primary key
+		//we are using find() method, because we are using STANDARD JPA API
+		Employee empoloyee=entityManager.find(Employee.class, theId);
+				
+		return empoloyee;
 	}
 
 	@Override
